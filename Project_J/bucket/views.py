@@ -29,7 +29,7 @@ def getBuckets(request):
             return Response(serializer.data, status=status.HTTP_201_CREATED)
     
 
-@api_view(['GET','PUT','UPDATE'])
+@api_view(['GET','PUT','DELETE'])
 def singleBucket(request, id):
     
     #check the validity of the request
@@ -47,5 +47,8 @@ def singleBucket(request, id):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        else:
-            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
+    elif request.method == 'DELETE':
+        bucket.delete()
+        Response(status=status.HTTP_204_NO_CONTENT)
