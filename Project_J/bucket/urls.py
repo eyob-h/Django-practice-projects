@@ -20,5 +20,6 @@ from bucket import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('bucket/', views.getBuckets)
+    path('bucket/', views.getBuckets),
+    path('bucket/<int:id>', views.singleBucket)
 ]

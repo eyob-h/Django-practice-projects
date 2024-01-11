@@ -27,4 +27,25 @@ def getBuckets(request):
         if serializer.is_valid():
             serializer.save()
             return Response(serializer.data, status=status.HTTP_201_CREATED)
-        
+    
+
+@api_view(['GET','PUT','UPDATE'])
+def singleBucket(request, id):
+    
+    #check the validity of the request
+    try:
+        bucket = Bucket.objects.get(pk=id)
+    except Bucket.DoesNotExist:
+        return Response(status=status.HTTP_404_NOT_FOUND)
+
+    if request.method=='GET':
+        serializer = BucketSerializer(bucket)
+        return Response(serializer.data)
+    
+    elif request.method=='PUT':
+        serializer = BucketSerializer(bucket, data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_201_CREATED)
+        else:
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
