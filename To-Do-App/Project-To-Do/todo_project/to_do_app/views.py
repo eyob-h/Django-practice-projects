@@ -13,18 +13,19 @@ def index(request):
             return redirect('home')
         
     tasks = Task.objects.all()
-    context = {'tasks':tasks, 'form':form}
+    context = {'tasks': tasks, 'form': form} 
     return render(request, 'to_do_app/index.html', context)
 
 def mark_as_done(request, task_id):
     task = Task.objects.get(pk=task_id)
-    task.status = True if task.status==False else False
+    # task.status = True if task.status==False else False
+    task.status = True
     task.save()
     return redirect('home')
 
 
-def delete_task(request, task_id):
-    task = Task.object.get(pk=task_id)
+def deleteTask(request, task_id):
+    task = Task.objects.get(pk=task_id)
     task.delete()
     return redirect('home')
 

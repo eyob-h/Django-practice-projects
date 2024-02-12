@@ -1,4 +1,4 @@
-{% extends 'todo_app/base.html' %}
+{% extends 'to_do_app/base.html' %}
 
 {% block title %}
     To-Do App
@@ -41,7 +41,7 @@
                                 <td class="striker"> {{ task.title }}</td>
                                 <td> Completed </td>
                                 <td> 
-                                    <a class="btns " href="{% url 'updateTask' task.id %}" >
+                                    <a class="btns " href="{% url 'mark_as_done' task.id %}" >
                                         <button class="btn disabled btn-outline-success">
                                             Done!
                                         </button>
@@ -59,7 +59,7 @@
                                 <td> {{ task.title }}</td>
                                 <td> Not yet! </td>
                                 <td>
-                                    <a class="btns" href="{% url 'updateTask' task.id %}">
+                                    <a class="btns" href="{% url 'mark_as_done' task.id %}">
                                         <button class="btn btn-success">
                                             Done!
                                         </button>
