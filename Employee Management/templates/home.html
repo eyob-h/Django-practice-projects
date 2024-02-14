@@ -15,39 +15,30 @@
     <div class="container">
         <h1 class="pt-4 m-10">Employee Management</h1>
         <table class="table">
-            <thead>
+          <thead>
+            <tr>
+              <th scope="col">#</th>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Email</th>
+              <th scope="col">Role</th>
+              
+            </tr>
+          </thead>
+          <tbody>
+              {%for e in employees%}
+              
               <tr>
-                <th scope="col">#</th>
-                <th scope="col">First</th>
-                <th scope="col">Last</th>
-                <th scope="col">Handle</th>
-                <th scope="col">Image</th>
+                
+                <th scope="row">{{e.id}}</th>
+                  <td><a href="https://abc.com">{{e.first_name}}</a></td>
+                  <td>{{e.last_name}}</td>
+                  <td>{{e.email}}</td>
+                  <td>{{e.role}}</td>
+                  <td>{{forloop.counter}}</td>
+                </tr>
 
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <th scope="row">1</th>
-                <td>Mark</td>
-                <td>Otto</td>
-                <td>@mdo</td>
-                <td><img  width="30px" src="{%static 'images/abc.jpg'%}" alt=""></td>
-
-              </tr>
-              <tr>
-                <th scope="row">2</th>
-                <td>Jacob</td>
-                <td>Thornton</td>
-                <td>@fat</td>
-                <td><img  width="30px" src="{%static 'images/abc.jpg'%}" alt=""></td>
-
-              </tr>
-              <tr>
-                <th scope="row">3</th>
-                <td colspan="2">Larry the Bird</td>
-                <td>@twitter</td>
-                <td><img  width="30px" src="{%static 'images/abc.jpg'%}" alt=""></td>
-              </tr>
+              {%endfor%}
             </tbody>
           </table>
     </div>
