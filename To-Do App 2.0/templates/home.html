@@ -43,12 +43,15 @@
             </div>
             <div class="col-md-5 col-lg-5">
                 <h5>Completed Tasks</h5>
+                {%for task in completed%}
+
                 <!-- List of all the tasks that have completed -->
                 <div class="card m-1">
                     <div class="card-body">
-                        This is the completed task.
+                        {{task.title}}
                     </div>
                 </div>
+                {%endfor%}
             </div>
         </div>
         <div class="row">
