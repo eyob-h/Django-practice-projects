@@ -54,11 +54,13 @@
         <div class="row">
             <div class="col-md-6 col-lg-6 p-0" style="position: absolute; bottom: 50px;">
                 <!-- To Do Form -->
-                <form action="" >
+                <form action="{% url 'addTask' %}" method="POST" >
+                    {% csrf_token %}
                     <div class="form-group">
                         <span style="display: flex;">
-                            <input type="text" class="form-control" placeholder="Add a task">
-                            <button class="btn btn-primary" style="width: 200px;"><i class="fa fa-plus"></i> Add</button>
+                            <input type="text" name='task' class="form-control" placeholder="Add a task">
+                            <input type="text" name='description' class="form-control" placeholder="(Optional) Enter description">
+                            <button type="submit" class="btn btn-primary" style="width: 200px;"> <i class="fa fa-plus"></i>  Add</button>
                         </span>
                     </div>
                 </form>
