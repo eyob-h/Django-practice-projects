@@ -19,6 +19,10 @@ def markAsCompleted(request, pk):
     task.save()
     return redirect('home')
 
+def deleteTask(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('home')
 # A single if else can do the trick
 # def markAsUndone(request, pk):
 #     task = get_object_or_404(Task, pk=pk)

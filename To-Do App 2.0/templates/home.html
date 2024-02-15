@@ -33,7 +33,7 @@
                        {{task.title}}
                         <span style="position: relative; float: right;">
                         <a class="btn btn-success" href="{% url 'markAsCompleted' task.id%}"><i class="fa fa-check"></i> Mark as Done</a>
-                        <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                        <a href="{%url 'deleteTask' task.id%}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         <a class="btn btn-primary"><i class="fa fa-pencil"></i></a>
                         </span>
                     </div>
@@ -51,7 +51,7 @@
                         {{task.title}}  
                         <span style="position: relative; float: right;">
                             <a class="btn btn-secondary" href="{% url 'markAsCompleted' task.id%}"><i class="fa fa-check"></i> Mark as Undone</a>
-                                <a class="btn btn-danger"><i class="fa fa-trash"></i></a>
+                                <a href="{%url 'deleteTask' task.id%}" class="btn btn-danger"><i class="fa fa-trash"></i></a>
                         </div>
                         
                         </span>             
