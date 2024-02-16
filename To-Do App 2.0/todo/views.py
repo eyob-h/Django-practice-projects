@@ -33,14 +33,20 @@ def deleteTask(request, pk):
     task.delete()
     return redirect('home')
 
+#EDIT TASK
 def editTask(request, pk):
     get_task = get_object_or_404(Task, pk=pk)
-    context = {
-        'get_task':get_task
-    }
 
-
-    return render(request, 'edit.task.html',context)
+    # we can also avoid making the updateTask endpoint by making a conditional statement
+    # if request.method == 'POST':
+    #     request.POST['task'] = get_task.title
+    #     request.POST['description'] = get_task.description
+    #     return redirect('home')
+    # else:
+    #     context = {
+    #         'get_task':get_task
+    #     } 
+    #     return render(request, 'edit.task.html',context)
 
 
 #Update Task
