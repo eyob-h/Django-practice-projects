@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Task Editing Page</title>
+    
+        <!-- Bootstrap -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+        <!-- Font Awesome Icons -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        
+        <style>
+            .form-control{
+            padding: 1.375rem .75rem !important;
+        }
+        </style>
+    </head>
+<body>
+    <div class="container">
+        <h3 class="pt-5 pb-5 text-center">Edit Task</h3>
+        <!-- To Do Form -->
+
+        <form action="{% url 'updateTask' get_task.id %}" method="POST" >
+            {% csrf_token %}
+            <div class="form-group" style="width: 700px; margin: auto;">
+                <span style="display: flex;">
+                    
+                    <!-- TASK TITLE INPUT -->
+                    <input type="text" name='task' value="{{get_task.title}}" class="form-control" placeholder="Add a task">
+                    
+                    <!-- DESCRIPTION INPUT -->
+                    <input type="text" name='description' value="{{get_task.description}}"class="form-control " style="margin-left: 20px" placeholder="(Optional) Enter description">
+                    
+                    <!-- SUBMIT BUTTON -->
+                    <button type="submit" class="btn btn-warning" style="width: 200px; margin-left: 20px"> <i class="fa fa-pencil"></i>Update</button>
+                </span>
+            </div>
+        </form>
+
+    </div>
+</body>
+</html>

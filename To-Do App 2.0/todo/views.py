@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
 from .models import Task
 
 # Create your views here.
@@ -10,6 +10,7 @@ def addTask(request):
     Task.objects.create(title=task, description=des)
     return redirect('home')
 
+
 def markAsCompleted(request, pk):
     task = get_object_or_404(Task, pk=pk)
     if task.status == True:
@@ -19,13 +20,38 @@ def markAsCompleted(request, pk):
     task.save()
     return redirect('home')
 
-def deleteTask(request, pk):
-    task = get_object_or_404(Task, pk=pk)
-    task.delete()
-    return redirect('home')
 # A single if else can do the trick
 # def markAsUndone(request, pk):
 #     task = get_object_or_404(Task, pk=pk)
 #     task.status = False
 #     task.save()
 #     return redirect('home')
+
+
+def deleteTask(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.delete()
+    return redirect('home')
+
+def editTask(request, pk):
+    get_task = get_object_or_404(Task, pk=pk)
+    context = {
+        'get_task':get_task
+    }
+
+
+    return render(request, 'edit.task.html',context)
+
+
+#Update Task
+
+def updateTask(request, pk):
+    task = get_object_or_404(Task, pk=pk)
+    task.title = request.POST['task']
+    task.description = request.POST['description']
+    task.save()
+
+    # return HttpResponse("UPDATED STUFF MY GUY", task.title, task.description)
+    return redirect('home')
+
+
