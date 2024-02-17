@@ -47,6 +47,11 @@ def editTask(request, pk):
     #         'get_task':get_task
     #     } 
     #     return render(request, 'edit.task.html',context)
+    context = {
+        'get_task':get_task
+    } 
+    
+    return render(request, 'edit.task.html',context)
 
 
 #Update Task
