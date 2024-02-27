@@ -1,0 +1,12 @@
+<h1>{{ question.question_text }}</h1>
+<ul>
+    {% if question.choice_set.all %}
+    <h3>Mango</h3>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_taxt }}</li>
+    {% endfor %}
+    {%else%}
+    <h3>Dinich</h3>
+
+    {% endif %}
+</ul>
