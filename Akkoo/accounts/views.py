@@ -26,6 +26,8 @@ def registerUser(request):
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
             user.role = User.CUSTOMER
             user.save()
+        else:
+            print(form.errors)
     
     else:
         form = UserForm()
