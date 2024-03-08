@@ -1,0 +1,32 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+  <title>Akkoo</title>
+  <!-- Custom styles for this template -->
+  <link rel="stylesheet" href="{% static 'css/style.css' %}?version=3" />
+
+</head>
+
+<body>
+
+
+  <!-- Load navbar -->
+  {% include 'includes/navbar.html' %}
+  
+  <!-- Load content -->
+  {% block content %}
+    <!-- The content goes here -->
+  {% endblock %}
+  
+  <!-- Load footer -->
+  {% include 'includes/footer.html' %}
+  
+
+  
