@@ -3,15 +3,15 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listings</title>
+    <title>{{listing.title}}</title>
 </head>
 <body>
-    <h1>Listings</h1>
+    <h1>Detail View for {{listing.title}}</h1>
     <ul>
-        {% for listing in listings%}
         <!-- <li>listing</li> -->
-        <a href="{% url 'view_single_listing' listing.id %} "><li>{{listing.title}}</li></a>
-        {% endfor %}
+        <li>Home: {{listing.title}}</li>
+        <li>Price: {{listing.price}}</li>
+        <li>Address: {{listing.address}}</li>
     </ul>
 </body>
 </html>

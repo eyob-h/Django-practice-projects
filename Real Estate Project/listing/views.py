@@ -11,3 +11,10 @@ def view_listings(request):
 
     # return HttpResponse("Listings here")
     return render(request, 'listings/listing.html', context)
+
+def view_single_listing(request, pk):
+    listing = models.Listing.objects.get(id=pk)
+    context = {
+        'listing': listing
+    }
+    return render(request, 'listings/detail_view.html' , context)
