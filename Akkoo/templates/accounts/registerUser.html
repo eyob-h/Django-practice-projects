@@ -48,6 +48,7 @@
     <!-- Display Field Errors to Users -->
     <div class="errorlist">
       <ul>
+        <!-- Display field Error -->
         {% for field in form %}
           {% if field.errors %}
             {% for error in field.errors %}
@@ -56,6 +57,7 @@
           {% endif %}
         {% endfor %}
         {% if form.non_field_errors%}
+        <!-- Display Non-field Error -->
         <li style="color:red">{{form.non_field_errors}}</li>
         {% endif %}
       </ul>  
