@@ -13,5 +13,6 @@
         <a href="{% url 'view_single_listing' listing.id %} "><li>{{listing.title}}</li></a>
         {% endfor %}
     </ul>
+    <a href="{% url 'create' %} "><li>Add New Listing</li></a>
 </body>
 </html>
