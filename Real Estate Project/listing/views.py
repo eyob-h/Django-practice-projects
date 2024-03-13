@@ -1,4 +1,4 @@
-from django.shortcuts import render, HttpResponse, redirect
+from django.shortcuts import render, HttpResponse, redirect, get_object_or_404
 
 # Create your views here.
 from . import models
@@ -35,9 +35,9 @@ def create_listing(request):
     return render(request, 'listings/create_listing.html', context)
 
 def update_listing(request, pk):
-    listing = models.Listing.objects.get(id=pk)
+    listing = get_object_or_404(models.Listing, id=pk)
     form = ListingForm(instance=listing)
-    
+
     if request.method == 'GET':
         context = {
             'listing':listing,
@@ -52,21 +52,25 @@ def update_listing(request, pk):
             form.save()
             return redirect('/')
 
+# Alternative way to update listing
+# def update_listing1(request, pk):
+#     listing = models.Listing.objects.get(id=pk)
+#     form = ListingForm(instance=listing)
 
-def update_listing1(request, pk):
-    listing = models.Listing.objects.get(id=pk)
-    form = ListingForm(instance=listing)
-
-    if request.method == 'POST':
-        form = ListingForm(request.POST, instance=listing)
-        if form.is_valid():
-            # print(request.POST['title'])
-            form.save() 
-            return redirect('/')
+#     if request.method == 'POST':
+#         form = ListingForm(request.POST, instance=listing)
+#         if form.is_valid():
+#             # print(request.POST['title'])
+#             form.save() 
+#             return redirect('/')
         
-    context = {
-        'form': form
-    }
-    return render(request, 'listings/update_listing.html', context)
+#     context = {
+#         'form': form
+#     }
+#     return render(request, 'listings/update_listing.html', context)
         
-        
+def delete_listing(request, pk):
+    listing = get_object_or_404(models.Listing, id=pk)
+    listing.delete()
+    return redirect('/')
+  
