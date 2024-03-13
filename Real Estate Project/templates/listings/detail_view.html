@@ -13,5 +13,10 @@
         <li>Price: {{listing.price}}</li>
         <li>Address: {{listing.address}}</li>
     </ul>
+    <a href="{% url 'update_listing' listing.id %}">
+        <button>
+            Edit
+        </button>
+    </a>
 </body>
 </html>

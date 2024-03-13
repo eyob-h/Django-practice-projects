@@ -5,6 +5,7 @@ urlpatterns = [
     path('',  views.view_listings, name='view_listings'),
     path('create/', views.create_listing, name='create'),
     path('<pk>/', views.view_single_listing, name='view_single_listing'),
+    path('<pk>/update_listing ', views.update_listing, name='update_listing'),
     
     
     # IT DOESN'T WORK IN THIS ORDER
