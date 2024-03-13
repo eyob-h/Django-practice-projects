@@ -23,7 +23,7 @@ def view_single_listing(request, pk):
 def create_listing(request):
     form = ListingForm()
     if request.method == "POST":
-        form = ListingForm(request.POST)
+        form = ListingForm(request.POST, request.FILES)
         # print(form)
         if form.is_valid():
             form.save()
@@ -46,7 +46,7 @@ def update_listing(request, pk):
         # return render(request, '/listings/update_listing.html', context) #THIS DOESN'T WORK!
         return render(request, 'listings/update_listing.html', context)
     else:
-        form = ListingForm(request.POST, instance=listing)
+        form = ListingForm(request.POST, instance=listing, files=request.FILES)
         if form.is_valid():
             print(request.POST['title'])
             form.save()

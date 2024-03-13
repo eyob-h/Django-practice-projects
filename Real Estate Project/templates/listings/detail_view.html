@@ -12,6 +12,7 @@
         <li>Home: {{listing.title}}</li>
         <li>Price: {{listing.price}}</li>
         <li>Address: {{listing.address}}</li>
+        <li><img src="{{ listing.image.url }}" alt="image of a house" width="300px"></li>
     </ul>
     <a href="{% url 'update_listing' listing.id %}">
         <button>

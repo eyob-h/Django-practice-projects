@@ -9,8 +9,8 @@ class Listing(models.Model):
     num_bathrooms = models.IntegerField()
     size = models.IntegerField()
     address = models.CharField(max_length=100)
+    image = models.ImageField()
     # owner = models.ForeignKey
-    # image
 
     def __str__(self):
         return self.title
