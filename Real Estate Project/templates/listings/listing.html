@@ -1,11 +1,8 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Listings</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+
+{%  block content %}
+
     <h1>Listings</h1>
     <ul>
         {% for listing in listings%}
@@ -14,5 +11,5 @@
         {% endfor %}
     </ul>
     <a href="{% url 'create' %} "><li>Add New Listing</li></a>
-</body>
-</html>
+
+{%  endblock %}

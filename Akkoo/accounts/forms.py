@@ -10,8 +10,9 @@ class UserForm(forms.ModelForm):
         fields = ['first_name', 'last_name', 'email', 'password', 'username']
 
 
+    #Overriding the clean method with custom code
     def clean(self):
-        cleaned_data = super(UserForm, self).clean()
+        cleaned_data = super(UserForm, self).clean() #clean() an in-built method to override the clean function
         password = cleaned_data.get('password')
         confirm_password = cleaned_data.get('confirm_password')
 

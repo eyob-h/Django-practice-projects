@@ -1,29 +1,23 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Update</title>
-</head>
-<body>
-    
+{% extends 'base.html' %}    
+
+{%  block content %}
     <form action="{% url 'update_listing' listing.id %}" method="POST" enctype="multipart/form-data">
-
+        
         {% csrf_token %}
-
+        
         {{form.as_p}}
         <!-- <label for="title">Tite</label>
-        <input type="text" name="title" value="{{listing.title}}">
+            <input type="text" name="title" value="{{listing.title}}">
+            
+            <label for="size">Size</label>
+            <input type="number" name="size" value="{{listing.size}}">
+            
+            <label for="address">Address</label>
+            <input type="text" name="address" value="{{listing.address}}"> -->
+            
+            
+            <button type="submit">Update</button>
+        </form>
         
-        <label for="size">Size</label>
-        <input type="number" name="size" value="{{listing.size}}">
         
-        <label for="address">Address</label>
-        <input type="text" name="address" value="{{listing.address}}"> -->
-
-        
-        <button type="submit">Update</button>
-    </form>
-    
-</body>
-</html>
+{%  endblock %}   
