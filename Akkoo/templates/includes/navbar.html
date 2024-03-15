@@ -2,15 +2,17 @@
 
 <header style="color: blueviolet;">
     <div>
-        <div>Logo</div>
+        <a href="{% url 'home' %} "><div>Logo</div></a>
         <div>
             <ul style="display:inline-flex;">
-                <li style="margin-right: 25px;">Home</li>
-                <li style="margin-right: 25px;">About</li>
-                <li style="margin-right: 25px;">Contact</li>
-                <li style="margin-right: 25px;">Blog</li>
+                <a href="{% url 'home'%} "><li style="margin-right: 25px;">Home</li></a>
+                <a href="{% url 'home'%} "><li style="margin-right: 25px;">About</li></a>
+                <a href="{% url 'home'%} "><li style="margin-right: 25px;">Contact</li></a>
+                <a href="{% url 'home'%} "><li style="margin-right: 25px;">Blog</li></a>
+                <a href="{% url 'home'%} "><li style="margin-right: 25px;"><button>Log in</button></li></a>
+                <a href="{% url 'registerUser'%} "><li style="margin-right: 25px;"><button>Register</button></li></a>
             </ul>
-            <button style="color: blueviolet;">Log in</button>
+            
         </div>
     </div>
 </header>
