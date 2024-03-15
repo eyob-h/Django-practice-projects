@@ -9,9 +9,16 @@
                 <a href="{% url 'home'%} "><li style="margin-right: 25px;">About</li></a>
                 <a href="{% url 'home'%} "><li style="margin-right: 25px;">Contact</li></a>
                 <a href="{% url 'home'%} "><li style="margin-right: 25px;">Blog</li></a>
-                <a href="{% url 'home'%} "><li style="margin-right: 25px;"><button>Log in</button></li></a>
-                <a href="{% url 'registerUser'%} "><li style="margin-right: 25px;"><button>Register</button></li></a>
-                <a href="{% url 'registerVendor'%} "><li style="margin-right: 25px;"><button>Register Business</button></li></a>
+                
+                {% if user.is_authenticated %}
+                    <a href="{% url 'myAccount'%} "><li style="margin-right: 25px;"><button>My Account</button></li></a>
+                    <a href="{% url 'logout'%} "><li style="margin-right: 25px;"><button>Logout</button></li></a>
+                {% else %}
+                    <a href="{% url 'registerUser'%} "><li style="margin-right: 25px;"><button>Register</button></li></a>
+                    <a href="{% url 'registerVendor'%} "><li style="margin-right: 25px;"><button>Register Business</button></li></a>
+                    <a href="{% url 'login'%} "><li style="margin-right: 25px;"><button>Log in</button></li></a>
+                {% endif %}
+
             </ul>
             
         </div>

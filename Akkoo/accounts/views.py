@@ -3,13 +3,35 @@ from .forms import UserForm
 from vendors.forms import VendorForm
 from .models import User, UserProfile
 from django.contrib import messages
+from django.contrib import auth
+from .utils import detectUser
 
-# Create your views here.
+from django.contrib.auth.decorators import login_required, user_passes_test
+from django.core.exceptions import PermissionDenied
+
+#Access control based on user type for vendors
+def check_role_vendor(user):
+    if user.role == 1:
+        return True
+    else:
+        raise PermissionDenied
+
+#Access control for customers
+def check_role_customer(user):
+    if user.role == 2:
+        return True
+    else:
+        raise PermissionDenied
 
 
+#register vendor
 def registerVendor(request):
 
-    if request.method == "POST":
+    if request.user.is_authenticated:
+        messages.warning(request, 'Already logged in')
+        return redirect('myAccount')
+
+    elif request.method == "POST":
         #get the user data
         form = UserForm(request.POST)
         
@@ -49,7 +71,12 @@ def registerVendor(request):
 
 def registerUser(request):  
     # return HttpResponse("User Registration")
-    if request.method == 'POST':
+
+    if request.user.is_authenticated:
+        messages.warning(request, 'Already logged in')
+        return redirect('myAccount')
+
+    elif request.method == 'POST':
         form = UserForm(request.POST)
         if form.is_valid():
             # #1 Saving the password using the form
@@ -73,10 +100,55 @@ def registerUser(request):
             messages.success(request, "Account Created Successfully!")
             
             return redirect('registerUser')
-    
     else:
         form = UserForm()
     context = {
         'form': form,
     }
     return render(request, 'accounts/registerUser.html', context)
+
+
+def login(request):
+    
+    if request.user.is_authenticated:
+        messages.warning(request, 'Already logged in')
+        return redirect('myAccount')
+
+    elif request.method == 'POST':
+        email = request.POST['email']
+        password = request.POST['password']
+
+        user = auth.authenticate(email=email, password=password)
+        print(user)
+        if user is not None:
+            auth.login(request, user)
+            messages.success(request, 'Logged In')
+            return redirect('myAccount')
+        else:
+            messages.error(request, 'Invalid Credentials')
+            return redirect('login')
+    return render(request, 'accounts/login.html')
+
+@login_required(login_url='login')
+def logout(request):
+    auth.logout(request)
+    messages.info(request, "Logged out successfully")
+    return redirect('login')
+
+@login_required(login_url='login')
+def myAccount(request):
+    user = request.user
+    # print(user)
+    redirectUrl = detectUser(user)
+    # print(f"REDIRECT******************))))**(*(&(&( + {redirectUrl}")
+    return redirect(redirectUrl)
+
+@login_required(login_url='login')
+@user_passes_test(check_role_customer)
+def custDashboard(request):
+    return render(request, 'accounts/custDashboard.html')
+
+@user_passes_test(check_role_vendor)
+@login_required(login_url='login')
+def venDashboard(request):
+    return render(request, 'accounts/venDashboard.html')
