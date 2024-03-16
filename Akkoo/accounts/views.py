@@ -4,10 +4,11 @@ from vendors.forms import VendorForm
 from .models import User, UserProfile
 from django.contrib import messages
 from django.contrib import auth
-from .utils import detectUser
+from .utils import detectUser, send_verification_email
 
 from django.contrib.auth.decorators import login_required, user_passes_test
 from django.core.exceptions import PermissionDenied
+
 
 #Access control based on user type for vendors
 def check_role_vendor(user):
@@ -15,6 +16,7 @@ def check_role_vendor(user):
         return True
     else:
         raise PermissionDenied
+
 
 #Access control for customers
 def check_role_customer(user):
@@ -26,7 +28,6 @@ def check_role_customer(user):
 
 #register vendor
 def registerVendor(request):
-
     if request.user.is_authenticated:
         messages.warning(request, 'Already logged in')
         return redirect('myAccount')
@@ -57,6 +58,8 @@ def registerVendor(request):
             user_profile = UserProfile.objects.get(user=user)
             vendor.user_profile = user_profile
             vendor.save()
+            #Send email
+            send_verification_email(request, user)
             messages.success(request, "Vendor has been registered successfully!")
         else:
             print(form.errors)
@@ -68,6 +71,7 @@ def registerVendor(request):
         'vendorForm' : vendorForm
     }
     return render(request, 'accounts/registerVendor.html', context)
+
 
 def registerUser(request):  
     # return HttpResponse("User Registration")
@@ -97,6 +101,9 @@ def registerUser(request):
             user = User.objects.create_user(first_name=first_name, last_name=last_name, username=username, email=email, password=password)
             user.role = User.CUSTOMER
             user.save()
+
+            #Send email
+            send_verification_email(request, user)
             messages.success(request, "Account Created Successfully!")
             
             return redirect('registerUser')
@@ -129,11 +136,13 @@ def login(request):
             return redirect('login')
     return render(request, 'accounts/login.html')
 
+
 @login_required(login_url='login')
 def logout(request):
     auth.logout(request)
     messages.info(request, "Logged out successfully")
     return redirect('login')
+
 
 @login_required(login_url='login')
 def myAccount(request):
@@ -143,12 +152,19 @@ def myAccount(request):
     # print(f"REDIRECT******************))))**(*(&(&( + {redirectUrl}")
     return redirect(redirectUrl)
 
+
 @login_required(login_url='login')
 @user_passes_test(check_role_customer)
 def custDashboard(request):
     return render(request, 'accounts/custDashboard.html')
 
+
 @user_passes_test(check_role_vendor)
 @login_required(login_url='login')
 def venDashboard(request):
     return render(request, 'accounts/venDashboard.html')
+
+
+def activateAccount(request, uidb64, token):
+    print("*************-------Account Activation-------**************")
+    return
