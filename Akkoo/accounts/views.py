@@ -64,7 +64,10 @@ def registerVendor(request):
             vendor.user_profile = user_profile
             vendor.save()
             #Send email
-            send_verification_email(request, user)
+            mail_subject = "Activate Your Account!"
+            email_template = "accounts/emails/account_verification_email.html"
+            
+            send_verification_email(request, user, mail_subject, email_template)
             messages.success(request, "Vendor has been registered successfully!")
         else:
             print(form.errors)
@@ -172,7 +175,7 @@ def venDashboard(request):
 
 def activateAccount(request, uidb64, token):
     print("*************-------Account Activation-------**************")
-
+   
     try:
         uid = urlsafe_base64_decode(uidb64).decode()
         user = User._default_manager.get(pk=uid)
@@ -190,4 +193,61 @@ def activateAccount(request, uidb64, token):
         return redirect('myAccount')
 
 
+def forgotPassword(request):
+
+    if request.method == 'POST':
+        email = request.POST['email']
+
+        if User.objects.filter(email=email).exists():
+            user = User.objects.get(email__exact=email)
+
+            #send password reset
+            mail_subject = "Reset Your Password!"
+            email_template = "accounts/emails/password_reset_email.html"
+            send_verification_email(request, user, mail_subject, email_template)
+
+            messages.success(request, 'Password reset link send successfully')
+            return redirect('login')
+        else:
+            messages.error(request, "Account Not Found!")
+            return redirect('forgot_password')
+    return render(request, 'accounts/forgot_password.html')
+
   
+def resetPasswordValidation(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+
+    if user is not None and default_token_generator.check_token(user, token):
+        request.session['uid'] = uid
+        messages.info(request, 'Reset Your Account!')
+        return redirect('resetPassword')
+    else:
+        messages.error(request, 'Invalid Activation Link')
+        return redirect('myAccount')
+
+    # return HttpResponse(f"Validation {uidb64} {token}" )
+
+def resetPassword(request):
+
+    if request.method == 'POST':
+        password = request.POST['password']
+        confirm_password = request.POST['confirm_password']
+
+        if password == confirm_password:
+            pk = request.session.get('uid')
+            user = User.objects.get(pk=pk)
+            
+            user.set_password(password)
+            user.is_active = True
+            user.save()
+            messages.success(request,"Password Reset Successfully!")
+            return redirect('login')
+        else:
+            messages.error("Passwords Don't Match")
+            return redirect('resetPassword')
+    return render(request, 'accounts/reset_password.html')
