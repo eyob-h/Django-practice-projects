@@ -1,5 +1,6 @@
 from django.shortcuts import render, HttpResponse, redirect
 from .forms import UserForm
+from vendors.models import Vendor
 from vendors.forms import VendorForm
 from .models import User, UserProfile
 from django.contrib import messages
@@ -170,6 +171,11 @@ def custDashboard(request):
 @user_passes_test(check_role_vendor)
 @login_required(login_url='login')
 def venDashboard(request):
+    vendor = Vendor.objects.get(user=request.user)
+    # context = { 
+    #     'vendor' : vendor,
+    # }
+    #Context processors got it covered.
     return render(request, 'accounts/venDashboard.html')
 
 
