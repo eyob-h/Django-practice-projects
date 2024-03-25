@@ -232,6 +232,7 @@ def resetPasswordValidation(request, uidb64, token):
 
     # return HttpResponse(f"Validation {uidb64} {token}" )
 
+
 def resetPassword(request):
 
     if request.method == 'POST':

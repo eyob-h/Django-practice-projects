@@ -1,0 +1,12 @@
+{% autoescape off %}
+
+    Greetings {{user.first_name}},
+    {%if is_approved %}
+    Congrats! Your request was approved
+    {% else %}
+
+    We're sorry! Your request was not approved.
+    {% endif %}
+    Please contact us for further information.
+
+{% endautoescape %}
