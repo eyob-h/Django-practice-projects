@@ -1,1 +1,107 @@
 {% extends 'base.html' %}
+
+{% load static  %}
+
+{% block content %}
+
+    <h1>Manage your profile</h1>
+    <form action="{% url 'vprofile' %}" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
+        <div class="container">
+          <h1>Manage</h1>
+          <hr>
+
+        <div>  
+          
+          <label for="profile_picture"><b>Update Profile Picture</b></label>
+          {{profile_form.profile_picture}}
+          <div style="color:red;">{{profile_form.profile_picture.errors}}</div>
+        </div>
+        
+        <div>  
+          <label for="cover_photo"><b>Update Cover photo</b></label>
+          {{profile_form.cover_photo}}
+          <div style="color:red;">{{profile_form.cover_photo.errors}}</div>
+        </div>
+        <div>  
+          <label for="vendor_licence"><b>Update Vendor licence</b></label>
+          {{vendor_form.vendor_licence}}
+          <div style="color:red;">{{vendor_form.vendor_licence.errors}}</div>
+        </div>
+        <div>  
+          <label for="cover_photo"><b>Vendor name</b></label>
+          {{vendor_form.vendor_name}}
+        </div>
+        
+       
+        
+        <div>  
+          <label for="address"><b>Address</b></label>
+          {{profile_form.address}}
+        </div>
+        <div>  
+          <label for="address_line_2"><b>Country</b></label>
+          {{profile_form.country}}
+        </div>
+        <div>  
+          <label for="address_line_2"><b>State</b></label>
+          {{profile_form.state}}
+        </div>
+        <div>  
+          <label for="address_line_2"><b>City</b></label>
+          {{profile_form.city}}
+        </div>
+        <div>  
+          <label for="address_line_2"><b>Pincode</b></label>
+          {{profile_form.pin_code}}
+        </div>
+        <div>  
+          <label for="pin_code"><b>Lon</b></label>
+          {{profile_form.pin_code}}
+        </div>
+        <div>  
+          <label for="lattitude"><b>Lat</b></label>
+          {{profile_form.latitude}}
+        </div>
+        <div>
+          <label for="longitude"><b>Lon</b></label>
+          {{profile_form.longitude}}
+        </div>
+        
+    
+    <button type="submit" class="registerbtn">Update</button>
+    </div>
+  
+    <!-- Display Field Errors to Users -->
+    <div class="errorlist">
+      <ul>
+        <!-- Display field Error -->
+        {% for field in form %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <li style="color:red">{{error}}</li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+        {% if form.non_field_errors%}
+        <!-- Display Non-field Error -->
+        <li style="color:red">{{form.non_field_errors}}</li>
+        {% endif %}
+      </ul>  
+
+      <!-- Display Success Message -->
+      <div>
+        <!-- Include success message -->
+        {% include 'includes/alerts.html' %}
+      </div>
+
+    </div>
+
+    <!-- Display Field Errors to Users -->
+    <hr>
+    <div class="container signin">
+      <p>Already have an account? <a href="#">Sign in</a>.</p>
+    </div>
+  </form>
+  {% endblock  %}
+  

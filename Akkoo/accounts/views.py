@@ -16,6 +16,7 @@ from django.contrib.auth.tokens import default_token_generator
 
 
 
+
 #Access control based on user type for vendors
 def check_role_vendor(user):
     if user.role == 1:
@@ -111,8 +112,11 @@ def registerUser(request):
             user.role = User.CUSTOMER
             user.save()
 
+            # print (user)
             #Send email
-            send_verification_email(request, user)
+            mail_subject = 'Please activate your account'
+            email_template = 'accounts/emails/account_verification_email.html'
+            send_verification_email(request, user, mail_subject, email_template)
             messages.success(request, "Account Created Successfully!")
             
             return redirect('registerUser')
@@ -168,8 +172,8 @@ def custDashboard(request):
     return render(request, 'accounts/custDashboard.html')
 
 
-@user_passes_test(check_role_vendor)
 @login_required(login_url='login')
+@user_passes_test(check_role_vendor)
 def venDashboard(request):
     vendor = Vendor.objects.get(user=request.user)
     # context = { 

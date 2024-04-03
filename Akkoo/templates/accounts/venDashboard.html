@@ -5,9 +5,11 @@
     <h1>Vendor Dashboard</h1>
 
     <h1>Welcome {{user.username}}</h1>
-    Business Name:    {{vendor.vendor_name}}
-    Profile image:    <img src="{{vendor.user_profile.profile_picture.url}}" width="50px" alt="">
-    Cover image:    {{vendor.vendor_name}}
+    Business Name:    {{vendor.vendor_name}}<br>
+    Profile image:    <img src="{{vendor.user_profile.profile_picture.url}}" width="50px" alt=""><br>
+    Cover image:    <img src="{{vendor.user_profile.cover_photo.url}}" width="50px" alt=""><br>
+    Address: {{vendor.user_profile.address}}<br>
+    Biz Name:    {{vendor.vendor_name}}<br>
 
 
     

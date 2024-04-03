@@ -5,5 +5,5 @@ from accounts import views as AccountViews
 urlpatterns = [
     # path('registerVendor/', views.registerVendor, name='registerVendor'),
     path('', AccountViews.venDashboard, name='vendor'),
-    path('profile/',views.vprofile, name='vprofile'),
+    path('profile/', views.vprofile, name='vprofile'),
 ]
