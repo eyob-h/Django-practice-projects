@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+{% load static  %}
+
+{% block content %}
+    {% include 'includes/v_sidebar.html' %}
+
+    <h1>Menu Builder</h1>
+    <button>Add Category</button>
+    <button>Add Food</button>
+    {% if fooditems %}
+        {% for food in fooditems %}
+        <hr>
+        <div style="display: flex; justify-content:space-around; ">
+            <h1>{{forloop.counter}}</h1>
+            <img width="100px" src="{{food.image.url}}" alt="Food Image">
+            <h3>{{food}}</h3>
+            <p>{{food.description}}</p>
+            <button>Edit</button>
+            <button>Delete</button>
+        </div>
+        <hr>
+        {% endfor%}
+        {% else %}
+        <h2>No foods found</h2>
+        <button>Add Food</button>
+    {% endif  %}
+{% endblock  %}
+  

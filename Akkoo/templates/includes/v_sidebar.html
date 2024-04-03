@@ -3,16 +3,42 @@
 
 </div>
 
-<ul>
+<ul style="display:inline; list-style-type: none; display: flex; ">
 
-    <a href="{% url 'venDashboard'%} "><li style="margin-right: 25px;">Vendor Dashboard</li></a>
-    <a href="{% url 'vprofile'%} "><li style="margin-right: 25px;">Menu Builder</li></a>
-    <a href="{% url 'home'%} "><li style="margin-right: 25px;">My Restaurant</li></a>
-    <a href="{% url 'home'%} "><li style="margin-right: 25px;">Orders</li></a>
-    <a href="{% url 'home'%} "><li style="margin-right: 25px;">Earnings</li></a>
-    <a href="{% url 'home'%} "><li style="margin-right: 25px;">Statements</li></a>
-    <a href="{% url 'home'%} "><li style="margin-right: 25px;">Profile Settings</li></a>
-    
-    <a href="{% url 'myAccount'%} "><li style="margin-right: 25px;"><button>Change Password</button></li></a>
+    <li>
+        <a href="{% url 'venDashboard'%} "><li style="margin-right: 25px;">Vendor Dashboard</li></a>
+    </li>
+
+   <li> <a href="{% url 'menu_builder'%}"><li style="margin-right: 25px;">Menu Builder</li></a>
+    </li>
+
+    <li>
+        <a href="{% url 'vprofile'%}"><li style="margin-right: 25px;">My Restaurant</li></a>
+
+    </li>
+    <li>
+        <a href="{% url 'home'%} "><li style="margin-right: 25px;">Orders</li></a>
+
+    </li>   
+    <li>
+        <a href="{% url 'home'%} "><li style="margin-right: 25px;">Earnings</li></a>
+
+    </li>   
+    <li>
+        <a href="{% url 'home'%} "><li style="margin-right: 25px;">Statements</li></a>
+
+    </li>   
+
+    <li>
+        <a href="{% url 'home'%} "><li style="margin-right: 25px;">Profile Settings</li></a>
+
+    </li>
+    <li>
+        <a href="{% url 'myAccount'%} "><li style="margin-right: 25px;"><button>Change Password</button></li></a>
+
+    </li>
+    <li>
     <a href="{% url 'logout'%} "><li style="margin-right: 25px;"><button>Logout</button></li></a>
+
+    </li>
 </ul>

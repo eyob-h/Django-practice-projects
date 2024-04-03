@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% load static  %}
+
+{% block content %}
+    {% include 'includes/v_sidebar.html' %}
+
+    <h1>Menu Builder</h1>
+    <button>Add Category</button>
+    <button>Add Food</button>
+    {% for cat in categories %}
+
+        <div>
+            <hr>
+            <a href="{% url 'fooditems_by_category' cat.id %}">
+                <h3>{{forloop.counter}}.{{cat.category_name}}</h3>
+            </a>
+            <button>Edit</button>
+            <button>Delete</button>
+            <hr>
+        </div>
+    {% endfor%}
+    
+{% endblock  %}
+  
