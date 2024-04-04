@@ -4,8 +4,10 @@
 
 {% block content %}
     {% include 'includes/v_sidebar.html' %}
-
     <h1>Menu Builder</h1>
+    <div>
+        <button onclick="history.back()">Back</button>
+    </div>
     <button>Add Category</button>
     <button>Add Food</button>
     {% if fooditems %}

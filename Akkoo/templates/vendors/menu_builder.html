@@ -6,7 +6,7 @@
     {% include 'includes/v_sidebar.html' %}
 
     <h1>Menu Builder</h1>
-    <button>Add Category</button>
+    <a href="{% url 'add_category' %}">Add Category</a>
     <button>Add Food</button>
     {% for cat in categories %}
 
