@@ -13,10 +13,12 @@
         <div>
             <hr>
             <a href="{% url 'fooditems_by_category' cat.id %}">
-                <h3>{{forloop.counter}}.{{cat.category_name}}</h3>
+                <h3>
+                    {{forloop.counter}}.{{cat.category_name}}
+                </h3>
             </a>
-            <button>Edit</button>
-            <button>Delete</button>
+            <a href="{% url 'edit_category' cat.id %}"><button>Edit</button></a>
+            <a href="{% url 'delete_category' cat.id %}" onclick="return confirm('Are you Sure?')"><button>Delete</button></a>
             <hr>
         </div>
     {% endfor%}
