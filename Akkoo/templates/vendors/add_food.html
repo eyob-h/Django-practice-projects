@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+
+{% load static  %}
+
+{% block content %}
+    {% include 'includes/v_sidebar.html' %}
+
+    <h1>ADD FOOD ITEM</h1>
+    <form action="{% url 'add_food' %}" method="POST">
+        {% csrf_token %}
+        <div>
+            <button onclick="history.back()">Back</button>
+        </div>
+        {{form}}
+       
+        <!-- Error Output -->
+        {% for field in form %}
+            {%if field.errors %}
+                {% for error in field.errors %}
+                    <h3 style="color:red">{{error}}</h3>
+                {% endfor  %}
+            {%endif%}
+        {% endfor %}
+
+        <button type="submit">Add</button>
+    </form>
+{% endblock  %}
+  
