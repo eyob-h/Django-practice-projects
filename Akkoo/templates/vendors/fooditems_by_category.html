@@ -18,8 +18,10 @@
             <img width="100px" src="{{food.image.url}}" alt="Food Image">
             <h3>{{food}}</h3>
             <p>{{food.description}}</p>
-            <button>Edit</button>
-            <button>Delete</button>
+            <div>
+                <a href="{% url 'edit_food' food.id %}"><button>Edit</button></a>
+                <a href="{% url 'edit_food' food.id %}"><button>Delete</button></a>
+            </div>
         </div>
         <hr>
         {% endfor%}

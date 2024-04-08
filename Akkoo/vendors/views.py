@@ -147,6 +147,8 @@ def delete_category(request, pk=None):
     return redirect('menu_builder')
 
 
+@login_required(login_url='login')
+@user_passes_test(check_role_vendor)
 def add_food(request):
     # return render(request, 'vendors/add_food.html')
     if request.method == 'POST':
@@ -169,3 +171,29 @@ def add_food(request):
         'form': form,
     }
     return render(request, 'vendors/add_food.html', context)
+
+
+@login_required(login_url='login')
+@user_passes_test(check_role_vendor)
+def edit_food(request, pk=None):
+    food = get_object_or_404(FoodItem, pk=pk)
+    if request.method == 'POST':
+        form = FoodItemForm(request.POST, request.FILES, instance=food)
+        if form.is_valid():
+            food_name = form.cleaned_data['food_title']
+            food = form.save(commit=False)
+            food.vendor = get_vendor(request)
+            food.slug = slugify(food_name)
+            form.save()
+            messages.success(request, 'Food updated successfully!')
+            return redirect('fooditems_by_category', food.category.id)
+        else:
+            print(form.errors)
+
+    else:
+        form = FoodItemForm(instance=food)
+    context = {
+        'form': form,
+        'food': food,
+    }
+    return render(request, 'vendors/edit_food.html', context)
