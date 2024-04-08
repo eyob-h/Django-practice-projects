@@ -8,8 +8,8 @@
     <div>
         <button onclick="history.back()">Back</button>
     </div>
-    <button>Add Category</button>
-    <button>Add Food</button>
+    <a href="{% url 'add_category' %}">Add Category</a>
+    <a href="{% url 'add_food' %}">|=Add Food=|</a>
     {% if fooditems %}
         {% for food in fooditems %}
         <hr>
@@ -18,16 +18,21 @@
             <img width="100px" src="{{food.image.url}}" alt="Food Image">
             <h3>{{food}}</h3>
             <p>{{food.description}}</p>
+            {% if food.is_available %}
+                <p style="color:green">Available</p>
+            {% else %}
+                <p style="color:red">Not available</p>
+            {% endif %}
             <div>
                 <a href="{% url 'edit_food' food.id %}"><button>Edit</button></a>
-                <a href="{% url 'edit_food' food.id %}"><button>Delete</button></a>
+                <a href="{% url 'delete_food' food.id %}" onclick="return confirm('Are you Sure?')"><button>Delete</button></a>
             </div>
         </div>
         <hr>
         {% endfor%}
         {% else %}
         <h2>No foods found</h2>
-        <button>Add Food</button>
+        <a href="{% url 'add_food' %}">|=Add Food=|</a>
     {% endif  %}
 {% endblock  %}
   

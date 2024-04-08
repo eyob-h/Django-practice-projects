@@ -197,3 +197,10 @@ def edit_food(request, pk=None):
         'food': food,
     }
     return render(request, 'vendors/edit_food.html', context)
+
+
+def delete_food(request, pk=None):
+    food = get_object_or_404(FoodItem, pk=pk)
+    food.delete()
+    messages.success(request, "Item successfully deleted")
+    return redirect('menu_builder')
