@@ -3,7 +3,19 @@
 
 
 {% block content %}
-<h1>Home Page</h1>
-<!-- <img src="{% static 'images/n1.jpg' %}" alt=""> -->
+    <h1>Home Page</h1>
+    {% for vendor in vendors %}
+        {{vendor}}
+        <br>
+        <br>
+        {{vendor.user_profile.city}}, 
+        {{vendor.user.first_name}}
+        {{vendor.user.last_name}}
+        <br>
+        <img src="{{ vendor.user_profile.profile_picture.url }}" width="300" alt="">
+        <hr>
+    {% endfor %}
+    <!-- <img width="300" src="{% static 'images/n1.jpg' %}" alt=""> -->
+
 {% endblock %}
 
