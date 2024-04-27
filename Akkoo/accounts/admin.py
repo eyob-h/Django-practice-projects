@@ -9,11 +9,13 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = ()
 
     ordering = ('-date_joined',) #don't forget the comma
-    list_display = ['first_name','last_name','email', 'role', 'is_active']  
+    list_display = ('first_name','last_name','email', 'role', 'is_active')
 
 # class UserAdmin(admin.ModelAdmin):
 #     fields = ['first_name','last_name','email', 'role']
 
+# class CustomUserProfile(UserAdmin):
+#     list_display = ('address')
 
 admin.site.register(User, CustomUserAdmin)
 admin.site.register(UserProfile)

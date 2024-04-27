@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{%block content %}
+    <h1>Marketplace</h1>
+    <p> We've found {{vendors_count}} vendor account.</p>
+    {% for vendor in vendors %}
+        <p>{{forloop.counter}} {{vendor.vendor_name}} </p>
+        <p>{{vendor.address}} </p>
+        <hr>
+    {% endfor %}
+
+{%endblock  %}

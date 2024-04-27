@@ -1,6 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-from django.db.models.fields.related import  OneToOneField
+from django.db.models.fields.related import OneToOneField
 # from django.db.models.fields.related import ForeignKey
 # from django.contrib.gis.db import models as gismodels
 # from django.contrib.gis.geos import Point
@@ -90,7 +90,6 @@ class User(AbstractBaseUser):
         return user_role
 
     
-
 class UserProfile(models.Model):
     user = OneToOneField(User, on_delete=models.CASCADE, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='users/profile_pictures', blank=True, null=True)
